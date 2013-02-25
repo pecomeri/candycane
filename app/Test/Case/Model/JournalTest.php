@@ -40,7 +40,7 @@ class JournalTestCase extends CakeTestCase {
  * @return void
  */
  	public function testIsEditableBy() {
-    # admin user
+    // admin user
     $usr = $this->Journal->User->findById(1);
 		  $usr['id'] = 1;
 		  $usr['admin'] = true;
@@ -48,14 +48,14 @@ class JournalTestCase extends CakeTestCase {
     $this->Journal->set($this->Journal->findByJournalizedId(1));
     $this->assertTrue($this->Journal->is_editable_by($usr));
 		  
-    # manager 
+    // manager 
     $usr['admin'] = false;
 		  $usr['status'] = "2";
 		  $usr['memberships'][0]['project_id'] = '1';
 		  $usr['memberships'][0]['role_id'] = '1';
     $this->assertTrue($this->Journal->is_editable_by($usr));
     
-    # anonymous
+    // anonymous
 		  $usr['memberships'][0]['project_id'] = '2';
 		  $usr['memberships'][0]['role_id'] = '1';
     $this->assertFalse($this->Journal->is_editable_by($usr));
